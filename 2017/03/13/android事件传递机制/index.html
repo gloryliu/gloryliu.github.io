@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>android事件传递机制</title>
+  <meta name="author" content="liu">
+   <meta name="description" content="view的事件分发机制  View的onTouch事件先于onClick执行 ，当onTouch返回false时onClick执行，当onTouch返回true时onClick不执行。首先你需要知道一点，只要你触摸到了任何一个控件，就一定会调用该控件的dispatchTouchEvent方法。123">
+  
+
+  <meta property="og:title" content="android事件传递机制"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="柳树的个人博客"/>
+ <meta property="og:image" content="undefined"/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="柳树的个人博客" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body>
+  <a id="top"></a>
+  <div id='wx_pic' style='display:none;'><img src='/wx_share.png'/></div>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;一个很帅的人正在阅读
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        android事件传递机制
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2017-03-13T07:44:01.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2017-03-13
+</time>
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/categories/开发经验/">开发经验</a>
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/android/">android</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <h1 id="view的事件分发机制"><a href="#view的事件分发机制" class="headerlink" title="view的事件分发机制"></a>view的事件分发机制</h1><p>  View的onTouch事件先于onClick执行 ，当onTouch返回false时onClick执行，当onTouch返回true时onClick不执行。<br>首先你需要知道一点，只要你触摸到了任何一个控件，就一定会调用该控件的dispatchTouchEvent方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">* <span class="doctag">@param</span> event 待分发的事件</span><br><span class="line">* <span class="doctag">@return</span> 如果返回true表示该事件被该view消耗。</span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dispatchTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">		......</span><br><span class="line">        <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">		    </span><br><span class="line">            ListenerInfo li = mListenerInfo;</span><br><span class="line">            <span class="keyword">if</span> (li != <span class="keyword">null</span> &amp;&amp; li.mOnTouchListener != <span class="keyword">null</span></span><br><span class="line">                    &amp;&amp; (mViewFlags &amp; ENABLED_MASK) == ENABLED</span><br><span class="line">                    &amp;&amp; li.mOnTouchListener.onTouch(<span class="keyword">this</span>, event)) &#123;</span><br><span class="line">                result = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!result &amp;&amp; onTouchEvent(event)) &#123;</span><br><span class="line">                result = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">		......</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>从源码中可以看到第一个if执行的条件是(1)ListenerInfo的mOnTouchListener不为空;(2)该view是enabled状态;(3)是mOnTouchListener的onTouch<br>返回true。mOnTouchListener是通过view的setOnTouchListener方法设置的。从上面的源码可以看出onTouch先于onClick方法执行。<br>第二个if判断的条件是result为false并且onTouchEvent返回true。<br>dispatchTouchEvent返回false活onTouchEvent,onClick和dispatchTouchEvent就不会接收到后续的事件，返回true会接收到后续事件。<br>dispatchTouchEvent方法中不执行super.dispatchTouchEvent(event)的话onTouchEvent,onClick都没发接收到事件，可以在不通的事件阶段执行<br>super.dispatchTouchEvent(event)都是可以的，这样在onTouchEvent,onClick中的开始阶段就和执行阶段一样。<br>view事件回调的执行顺序是dispatchTouchEvent-&gt;onTouch-&gt;onTouchEvent-&gt;onClick</p>
+<h1 id="viewGroup的事件分发机制"><a href="#viewGroup的事件分发机制" class="headerlink" title="viewGroup的事件分发机制"></a>viewGroup的事件分发机制</h1><p>   viewGroup的onInterceptTouchEvent返回false表示不拦截事件，点击其中的view会执行view的事件，点击空白的地方会执行viewGroup的事件;<br>返回true表示viewGroup拦截事件，这样子view都不会接收到事件。onTouch返回false后续事件都不会收到，返回true才会收到后续事件。<br>viewGroup拦截事件，这样子view都不会接收到事件。onTouch返回false后续事件都不会收到，返回true才会收到后续事件。</p>
+<h1 id="viewGroup拦截事件拦截机制"><a href="#viewGroup拦截事件拦截机制" class="headerlink" title="viewGroup拦截事件拦截机制"></a>viewGroup拦截事件拦截机制</h1><pre><code>viewGroup的onInterceptTouchEvent点击自己的时候会执行一次，点击子view的时候每次事件会被调用，如果在某个阶段onInterceptTouchEvent返回true
+</code></pre><p>时后续事件子view都不会收到。viewGroup事件回调的执行顺序是dispatchTouchEvent-&gt;onInterceptTouchEvent-&gt;onTouch-&gt;onTouchEvent-&gt;onClick</p>
+
+
+  </article>
+  </script>
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        Copyright © 1999-2017
+    </div>
+    <div class="secondrow">
+        <a href="/about">
+        liu
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
