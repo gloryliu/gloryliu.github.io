@@ -1,143 +1,713 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="google-site-verification" content="" />
-  
-  <title>Porter-Duff显示规则</title>
-  <meta name="author" content="liu">
-   <meta name="description" content="显示样式如下：
-1.PorterDuff.Mode.CLEAR   所绘制不会提交到画布上。2.PorterDuff.Mode.SRC   显示上层绘制图片3.PorterDuff.Mode.DST  显示下层绘制图片4.PorterDuff.Mode.SRC_OVER  正常绘制显示，上下层绘制叠">
+<!doctype html>
+
+
+
   
 
-  <meta property="og:title" content="Porter-Duff显示规则"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:site_name" content="柳树的个人博客"/>
- <meta property="og:image" content="undefined"/>
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
-  <link rel="alternate" href="/atom.xml" title="柳树的个人博客" type="application/atom+xml">
-  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/css/m.min.css">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="显示样式如下：
+1.PorterDuff.Mode.CLEAR   所绘制不会提交到画布上。2.PorterDuff.Mode.SRC   显示上层绘制图片3.PorterDuff.Mode.DST  显示下层绘制图片4.PorterDuff.Mode.SRC_OVER  正常绘制显示，上下层绘制叠盖。5.PorterDuff.Mode.DST_OVER  上下层都显示。下层居上显示。6.Port">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Porter-Duff显示规则">
+<meta property="og:url" content="http://liu1024.cn/2017/02/10/Porter-Duff显示规则/index.html">
+<meta property="og:site_name" content="Aaron的个人博客">
+<meta property="og:description" content="显示样式如下：
+1.PorterDuff.Mode.CLEAR   所绘制不会提交到画布上。2.PorterDuff.Mode.SRC   显示上层绘制图片3.PorterDuff.Mode.DST  显示下层绘制图片4.PorterDuff.Mode.SRC_OVER  正常绘制显示，上下层绘制叠盖。5.PorterDuff.Mode.DST_OVER  上下层都显示。下层居上显示。6.Port">
+<meta property="og:image" content="http://liu1024.cn/images/poterduff.gif">
+<meta property="og:updated_time" content="2017-02-10T07:18:44.641Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Porter-Duff显示规则">
+<meta name="twitter:description" content="显示样式如下：
+1.PorterDuff.Mode.CLEAR   所绘制不会提交到画布上。2.PorterDuff.Mode.SRC   显示上层绘制图片3.PorterDuff.Mode.DST  显示下层绘制图片4.PorterDuff.Mode.SRC_OVER  正常绘制显示，上下层绘制叠盖。5.PorterDuff.Mode.DST_OVER  上下层都显示。下层居上显示。6.Port">
+<meta name="twitter:image" content="http://liu1024.cn/images/poterduff.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Aaron'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://liu1024.cn/2017/02/10/Porter-Duff显示规则/"/>
+
+
+
+
+
+  <title> Porter-Duff显示规则 | Aaron的个人博客 </title>
 </head>
 
-<body>
-  <a id="top"></a>
-  <div id='wx_pic' style='display:none;'><img src='/wx_share.png'/></div>
-  <div id="main">
-    <div class="behind">
-      <div class="back">
-        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
-      </div>
-      <div class="description">
-        &nbsp;一个很帅的人正在阅读
-      </div>
-    </div>
-    <div class="container">
-      
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <article class="standard post">
-    <div class="title">
-      
-  
-    <h1 class="page-title center">
-        Porter-Duff显示规则
-    </h1>
   
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aaron的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div class="meta center">
       
-<time datetime="2017-02-10T06:56:52.000Z">
-  <i class="fa fa-calendar"></i>&nbsp;
-  2017-02-10
-</time>
+        <p class="site-subtitle">一个很帅的人正在阅读</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
 
 
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://liu1024.cn/2017/02/10/Porter-Duff显示规则/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww3.sinaimg.cn/mw690/a4a46183jw8eykg5nwl9tj20e80e83zd.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aaron的个人博客">
+    </span>
 
     
-    &nbsp;
-    <i class="fa fa-tag"></i>&nbsp;
-    <a href="/categories/开发经验/">开发经验</a>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Porter-Duff显示规则
+              
+            
+          </h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-10T14:56:52+08:00">
+                2017-02-10
+              </time>
+            
 
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发经验/" itemprop="url" rel="index">
+                    <span itemprop="name">开发经验</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
-    &nbsp;
-    <i class="fa fa-tag"></i>&nbsp;
-    <a href="/tags/android/">android</a>
 
+    <div class="post-body" itemprop="articleBody">
 
-    </div>
-    <hr>
-    <div class="picture-container">
       
-    </div>
-    <p>显示样式如下：<br><img src="/images/poterduff.gif" alt="img"></p>
+      
+
+      
+        <p>显示样式如下：<br><img src="/images/poterduff.gif" alt="img"></p>
 <p>1.PorterDuff.Mode.CLEAR<br>   所绘制不会提交到画布上。<br>2.PorterDuff.Mode.SRC<br>   显示上层绘制图片<br>3.PorterDuff.Mode.DST<br>  显示下层绘制图片<br>4.PorterDuff.Mode.SRC_OVER<br>  正常绘制显示，上下层绘制叠盖。<br>5.PorterDuff.Mode.DST_OVER<br>  上下层都显示。下层居上显示。<br>6.PorterDuff.Mode.SRC_IN<br>   取两层绘制交集。显示上层。<br>7.PorterDuff.Mode.DST_IN<br>  取两层绘制交集。显示下层。<br>8.PorterDuff.Mode.SRC_OUT<br> 取上层绘制非交集部分。<br>9.PorterDuff.Mode.DST_OUT<br> 取下层绘制非交集部分。<br>10.PorterDuff.Mode.SRC_ATOP<br> 取下层非交集部分与上层交集部分<br>11.PorterDuff.Mode.DST_ATOP<br>  取上层非交集部分与下层交集部分<br>12.PorterDuff.Mode.XOR<br>13.PorterDuff.Mode.DARKEN<br>14.PorterDuff.Mode.LIGHTEN<br>15.PorterDuff.Mode.MULTIPLY<br>16.PorterDuff.Mode.SCREEN</p>
 
+      
+    </div>
 
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/10/onDraw和dispatchDraw/" rel="next" title="onDraw和dispatchDraw">
+                <i class="fa fa-chevron-left"></i> onDraw和dispatchDraw
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/21/android中view-getLeft-getRight-getTop-getBottom/" rel="prev" title="android中view.getLeft(), getRight(), getTop(), getBottom(),getWidth,getHeight">
+                android中view.getLeft(), getRight(), getTop(), getBottom(),getWidth,getHeight <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
-  </script>
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-  </script>
-  <div class="busuanzi center">
-    页阅读量:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
-    站访问量:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
-    站访客数:&nbsp;<span id="busuanzi_value_site_uv"></span>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
   </div>
 
 
-
-
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
-  <footer class="page-footer"><div class="clearfix">
-</div>
-<div class="right-foot container">
-    <div class="firstrow">
-        <a href="#top" target="_self">
-        <i class="fa fa-arrow-right"></i>
-        </a>
-        Copyright © 1999-2017
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww3.sinaimg.cn/mw690/a4a46183jw8eykg5nwl9tj20e80e83zd.jpg"
+               alt="Aaron" />
+          <p class="site-author-name" itemprop="name">Aaron</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gloryliu/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2762236291" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
     </div>
-    <div class="secondrow">
-        <a href="/about">
-        liu
-        </a>
-    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
 </div>
-<div class="clearfix">
-</div>
-</footer>
-  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
-<script src="/js/search.js"></script>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
 <script type="text/javascript">
-
-// disqus scripts
-
-
-// dropdown scripts
-$(".dropdown").click(function(event) {
-  var current = $(this);
-  event.stopPropagation();
-  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
-});
-$(document).click(function(){
-    $(".dropdown-content").removeClass("open");
-})
-
-var path = "/search.xml";
-searchFunc(path, 'local-search-input', 'local-search-result');
-
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
