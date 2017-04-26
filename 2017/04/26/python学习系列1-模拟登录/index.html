@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -90,16 +90,19 @@
 
 
 
-<meta name="description" content="Android的view组件显示主要经过mesure, layout和draw这三个过程。在mesure阶段里调用mesure(int widthSpec, int heightSpec)方法，这个方法是final不能被重写，在这个过程里会调用onMesure(int widthSpec, int heightSpec)方法。当组件设置好大小后，调用final layout(int l, int">
+<meta name="description" content="python模拟登录的第一步是去目标网站去抓取登录的url，工具我用的是firebug，对于复杂的接口得用发杂的工具。
+打开firebug填写用户名和密码就可以看见接口和参数了，需要选择保持不然登录成功后会进行页面跳转，这样是看不到登录时调用的什么接口的。&amp;lt;%img http://wx2.sinaimg.cn/large/a4a46183ly1ff05iz9ldcj20mv04dglq.jp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="onDraw和dispatchDraw">
-<meta property="og:url" content="http://liu1024.cn/2017/02/10/onDraw和dispatchDraw/index.html">
+<meta property="og:title" content="python学习系列1--模拟登录">
+<meta property="og:url" content="http://liu1024.cn/2017/04/26/python学习系列1-模拟登录/index.html">
 <meta property="og:site_name" content="Aaron的个人博客">
-<meta property="og:description" content="Android的view组件显示主要经过mesure, layout和draw这三个过程。在mesure阶段里调用mesure(int widthSpec, int heightSpec)方法，这个方法是final不能被重写，在这个过程里会调用onMesure(int widthSpec, int heightSpec)方法。当组件设置好大小后，调用final layout(int l, int">
-<meta property="og:updated_time" content="2017-02-10T07:07:37.582Z">
+<meta property="og:description" content="python模拟登录的第一步是去目标网站去抓取登录的url，工具我用的是firebug，对于复杂的接口得用发杂的工具。
+打开firebug填写用户名和密码就可以看见接口和参数了，需要选择保持不然登录成功后会进行页面跳转，这样是看不到登录时调用的什么接口的。&amp;lt;%img http://wx2.sinaimg.cn/large/a4a46183ly1ff05iz9ldcj20mv04dglq.jp">
+<meta property="og:updated_time" content="2017-04-26T08:48:12.913Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="onDraw和dispatchDraw">
-<meta name="twitter:description" content="Android的view组件显示主要经过mesure, layout和draw这三个过程。在mesure阶段里调用mesure(int widthSpec, int heightSpec)方法，这个方法是final不能被重写，在这个过程里会调用onMesure(int widthSpec, int heightSpec)方法。当组件设置好大小后，调用final layout(int l, int">
+<meta name="twitter:title" content="python学习系列1--模拟登录">
+<meta name="twitter:description" content="python模拟登录的第一步是去目标网站去抓取登录的url，工具我用的是firebug，对于复杂的接口得用发杂的工具。
+打开firebug填写用户名和密码就可以看见接口和参数了，需要选择保持不然登录成功后会进行页面跳转，这样是看不到登录时调用的什么接口的。&amp;lt;%img http://wx2.sinaimg.cn/large/a4a46183ly1ff05iz9ldcj20mv04dglq.jp">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://liu1024.cn/2017/02/10/onDraw和dispatchDraw/"/>
+  <link rel="canonical" href="http://liu1024.cn/2017/04/26/python学习系列1-模拟登录/"/>
 
 
 
 
 
-  <title> onDraw和dispatchDraw | Aaron的个人博客 </title>
+  <title> python学习系列1--模拟登录 | Aaron的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +265,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://liu1024.cn/2017/02/10/onDraw和dispatchDraw/">
+    <link itemprop="mainEntityOfPage" href="http://liu1024.cn/2017/04/26/python学习系列1-模拟登录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron">
@@ -283,7 +286,7 @@
             
             
               
-                onDraw和dispatchDraw
+                python学习系列1--模拟登录
               
             
           </h1>
@@ -298,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-10T14:52:50+08:00">
-                2017-02-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T16:38:23+08:00">
+                2017-04-26
               </time>
             
 
@@ -321,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发经验/" itemprop="url" rel="index">
-                    <span itemprop="name">开发经验</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -355,7 +358,8 @@
       
 
       
-        <p>Android的view组件显示主要经过mesure, layout和draw这三个过程。在mesure阶段里调用mesure(int widthSpec, int heightSpec)方法，这个方法是final不能被重写，在这个过程里会调用onMesure(int widthSpec, int heightSpec)方法。当组件设置好大小后，调用final layout(int l, int t, int r, int b)方法进行布局，在这个过程里会调用onLayout(boolean changed, int l, int t, int r, int b)方法，所以处理组件的布局通常要重写onMesure和onLayout这两个方法。<br>    View组件的绘制会调用draw(Canvas canvas)方法，这个方法在源代码里看不到在哪里调用…draw过程中主要是先画Drawable背景，对drawable调用setBounds()然后是draw(Canvas c)方法.有点注意的是背景drawable的实际大小会影响view组件的大小，drawable的实际大小通过getIntrinsicWidth()和getIntrinsicHeight()获取，当背景比较大时view组件大小等于背景drawable的大小，不过俺没有在源代码里找到布局时调用过 getIntrinsicWidth()和getIntrinsicHeight()方法…<br>    画完背景后，draw过程会调用onDraw(Canvas canvas)方法，然后就是dispatchDraw(Canvas canvas)方法, dispatchDraw()主要是分发给子组件进行绘制，我们通常定制组件的时候重写的是onDraw()方法。值得注意的是ViewGroup容器组件的绘制，当它没有背景时直接调用的是dispatchDraw()方法, 而绕过了draw()方法，当它有背景的时候就调用draw()方法，而draw()方法里包含了dispatchDraw()方法的调用。因此要在ViewGroup上绘制东西的时候往往重写的是dispatchDraw()方法而不是onDraw()方法，或者自定制一个Drawable，重写它的draw(Canvas c)和getIntrinsicWidth(),<br>getIntrinsicHeight()方法，然后设为背景。</p>
+        <pre><code>python模拟登录的第一步是去目标网站去抓取登录的url，工具我用的是firebug，对于复杂的接口得用发杂的工具。
+</code></pre><p>打开firebug填写用户名和密码就可以看见接口和参数了，需要选择保持不然登录成功后会进行页面跳转，这样是看不到登录时调用的什么接口的。<br>&lt;%img <a href="http://wx2.sinaimg.cn/large/a4a46183ly1ff05iz9ldcj20mv04dglq.jpg%&gt;" target="_blank" rel="external">http://wx2.sinaimg.cn/large/a4a46183ly1ff05iz9ldcj20mv04dglq.jpg%&gt;</a><br>模拟使用的是python3的urllib模块,对于python2的需要修改一下代码。<br>代码如下：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">loginurl = <span class="string">'http://zhixing.bjtu.edu.cn/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes&amp;inajax=1'</span></span><br><span class="line">logouturl = <span class="string">'http://zhixing.bjtu.edu.cn/member.php?mod=logging&amp;action=logout&amp;formhash=b863e624'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#登录</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    handlekey = <span class="string">'ls'</span></span><br><span class="line">    password = <span class="string">'xxx'</span></span><br><span class="line">    quickforward = <span class="string">'yes'</span></span><br><span class="line">    username = <span class="string">'xxx'</span></span><br><span class="line">    data = &#123;<span class="string">'handlekey'</span>:handlekey,</span><br><span class="line">            <span class="string">'password'</span>:password,</span><br><span class="line">            <span class="string">'quickforward'</span>:quickforward,</span><br><span class="line">            <span class="string">'username'</span>:username&#125;</span><br><span class="line"></span><br><span class="line">    postdata = urllib.parse.urlencode(data).encode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        request = urllib.request.Request(loginurl,postdata)</span><br><span class="line">        response = urllib.request.urlopen(request)</span><br><span class="line">        <span class="keyword">if</span>(response.read().decode(<span class="string">'utf-8'</span>).find(<span class="string">'欢迎您回来'</span>)&gt;<span class="number">0</span>):</span><br><span class="line">            print(<span class="string">'登录成功'</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(e)</span><br><span class="line"></span><br><span class="line"><span class="comment">#退出登录</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logout</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        request = urllib.request.urlopen(logouturl)</span><br><span class="line">        response = request.read().decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        <span class="keyword">if</span>(response.find(<span class="string">'后使用快捷导航'</span>)):</span><br><span class="line">            print(<span class="string">'成功退出'</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(e)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    action = input(<span class="string">'1为登录，2为退出登录'</span>)</span><br><span class="line">    <span class="keyword">if</span> action <span class="keyword">is</span> <span class="string">'1'</span>:</span><br><span class="line">        login()</span><br><span class="line">    <span class="keyword">elif</span> action <span class="keyword">is</span> <span class="string">'2'</span>:</span><br><span class="line">        logout()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'请输入 1 或者 2 '</span>)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -385,7 +389,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag"># android</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
         </div>
       
@@ -398,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/09/android多线程下载/" rel="next" title="android多线程下载">
-                <i class="fa fa-chevron-left"></i> android多线程下载
+              <a href="/2017/04/26/android自定义动画2/" rel="next" title="android自定义动画2">
+                <i class="fa fa-chevron-left"></i> android自定义动画2
               </a>
             
           </div>
@@ -407,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/10/Porter-Duff显示规则/" rel="prev" title="Porter-Duff显示规则">
-                Porter-Duff显示规则 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
