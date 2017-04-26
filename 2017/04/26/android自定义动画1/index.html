@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Aaron的个人博客">
 <meta property="og:description" content="继承Animation类实现自定义动画效果。　　通过重写protected void applyTransformation(float interpolatedTime, Transformation t)方法实现自己的效果，这个方法会在动画绘制的过程中反复调用，每次调用interpolatedTime值都会发生变化，变化范围为0~1,当为1时表用动画结束。
 123456789101112131">
-<meta property="og:updated_time" content="2017-04-26T05:32:37.771Z">
+<meta property="og:updated_time" content="2017-04-26T05:59:54.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android自定义动画1">
 <meta name="twitter:description" content="继承Animation类实现自定义动画效果。　　通过重写protected void applyTransformation(float interpolatedTime, Transformation t)方法实现自己的效果，这个方法会在动画绘制的过程中反复调用，每次调用interpolatedTime值都会发生变化，变化范围为0~1,当为1时表用动画结束。
@@ -360,7 +360,7 @@
       
         <h1 id="继承Animation类实现自定义动画效果。"><a href="#继承Animation类实现自定义动画效果。" class="headerlink" title="继承Animation类实现自定义动画效果。"></a>继承Animation类实现自定义动画效果。</h1><p>　　通过重写protected void applyTransformation(float interpolatedTime, Transformation t)方法实现自己的效果，这个方法会在动画绘制的过程中反复调用，每次调用interpolatedTime值都会发生变化，变化范围为0~1,当为1时表用动画结束。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AlbumAnimation</span> <span class="keyword">extends</span> <span class="title">Animation</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mCenterX;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mCenterY;</span><br><span class="line">    <span class="keyword">private</span> Camera camera;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(<span class="keyword">int</span> width, <span class="keyword">int</span> height, <span class="keyword">int</span> parentWidth, <span class="keyword">int</span> parentHeight)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.initialize(width, height, parentWidth, parentHeight);</span><br><span class="line">        mCenterX = width/<span class="number">2</span>;</span><br><span class="line">        mCenterY = height/<span class="number">2</span>;</span><br><span class="line">        camera = <span class="keyword">new</span> Camera();</span><br><span class="line">        setDuration(<span class="number">2000</span>);</span><br><span class="line">        <span class="comment">//setFillAfter(true);</span></span><br><span class="line">        setInterpolator(<span class="keyword">new</span> LinearInterpolator());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">applyTransformation</span><span class="params">(<span class="keyword">float</span> interpolatedTime, Transformation t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.applyTransformation(interpolatedTime, t);</span><br><span class="line">        <span class="keyword">final</span> Matrix matrix = t.getMatrix();</span><br><span class="line">        camera.save();</span><br><span class="line">        camera.translate(-<span class="number">0.0f</span>,<span class="number">0.0f</span>,-<span class="number">200.0f</span>+(<span class="number">200</span>*interpolatedTime));</span><br><span class="line">        camera.getMatrix(matrix);</span><br><span class="line">        camera.restore();</span><br><span class="line">        matrix.preTranslate(-mCenterX,-mCenterY);</span><br><span class="line">        matrix.postTranslate(mCenterX,mCenterY);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　　Camera就像一个摄像机，一个物体在原地不动，然后我们带着这个摄像机四处移动，在摄像机里面呈现出来的画面，就会有立体感，就可以从各个角度观看这个物体。它有旋转、平移的一系列方法，实际上都是在改变一个Matrix对象，一系列操作完毕之后，我们得到这个Matrix，然后画我们的物体，就可以了。<br>常用的API如下：<br>　　rotateX(float degree) 绕着x轴旋转degree个度数<br>　　rotateY(float degree) 绕着y轴旋转degree个度数<br>　　rotateZ(float degree) 绕着z轴旋转degree个度数<br>　　translate(float x,float y,float z) 平移一段距离<br>　　save()和restore() 作用跟Canvas的一样，保存原状态，操作完之后，恢复到原状态。</p>
+<p>　　有时也会实现public void initialize(int width, int height, int parentWidth, int parentHeight)函数，这是一个回调函数告诉Animation目标View的大小参数，在这里可以初始化一些相关的参数，例如设置动画持续时间、设置Interpolator、设置动画的参考点等。<br>　　Camera就像一个摄像机，一个物体在原地不动，然后我们带着这个摄像机四处移动，在摄像机里面呈现出来的画面，就会有立体感，就可以从各个角度观看这个物体。它有旋转、平移的一系列方法，实际上都是在改变一个Matrix对象，一系列操作完毕之后，我们得到这个Matrix，然后画我们的物体，就可以了。<br>常用的API如下：<br>　　rotateX(float degree) 绕着x轴旋转degree个度数<br>　　rotateY(float degree) 绕着y轴旋转degree个度数<br>　　rotateZ(float degree) 绕着z轴旋转degree个度数<br>　　translate(float x,float y,float z) 平移一段距离<br>　　save()和restore() 作用跟Canvas的一样，保存原状态，操作完之后，恢复到原状态。</p>
 
       
     </div>
@@ -416,6 +416,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/26/android自定义动画2/" rel="prev" title="android自定义动画2">
+                android自定义动画2 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -487,7 +491,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -509,7 +513,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
