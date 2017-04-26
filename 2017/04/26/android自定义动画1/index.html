@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android," />
+  <meta name="keywords" content="android,Animation,自定义动画," />
 
 
 
@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="在开发中会遇到比较少量的Fragment之间切换，这时候没必要选择ViewPage。但是需要避免Fragment重新被实例化（生命周期重走）1234567891011121314151617181920212223242526272829303132333435363738394041424344public class FragmentActivity extends AppCompatActi">
+<meta name="description" content="继承Animation类实现自定义动画效果。  通过重写protected void applyTransformation(float interpolatedTime, Transformation t)方法实现自己的效果，这个方法会在动画绘制的过程中反复调用，每次调用interpolatedTime值都会发生变化，变化范围为0~1,当为1时表用动画结束。1234567891011121314">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fragment却换时防止重新实例化">
-<meta property="og:url" content="http://liu1024.cn/2016/07/18/Fragment却换时防止重新实例化/index.html">
+<meta property="og:title" content="android自定义动画1">
+<meta property="og:url" content="http://liu1024.cn/2017/04/26/android自定义动画1/index.html">
 <meta property="og:site_name" content="Aaron的个人博客">
-<meta property="og:description" content="在开发中会遇到比较少量的Fragment之间切换，这时候没必要选择ViewPage。但是需要避免Fragment重新被实例化（生命周期重走）1234567891011121314151617181920212223242526272829303132333435363738394041424344public class FragmentActivity extends AppCompatActi">
-<meta property="og:updated_time" content="2016-07-18T03:22:50.427Z">
+<meta property="og:description" content="继承Animation类实现自定义动画效果。  通过重写protected void applyTransformation(float interpolatedTime, Transformation t)方法实现自己的效果，这个方法会在动画绘制的过程中反复调用，每次调用interpolatedTime值都会发生变化，变化范围为0~1,当为1时表用动画结束。1234567891011121314">
+<meta property="og:updated_time" content="2017-04-26T04:27:31.221Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fragment却换时防止重新实例化">
-<meta name="twitter:description" content="在开发中会遇到比较少量的Fragment之间切换，这时候没必要选择ViewPage。但是需要避免Fragment重新被实例化（生命周期重走）1234567891011121314151617181920212223242526272829303132333435363738394041424344public class FragmentActivity extends AppCompatActi">
+<meta name="twitter:title" content="android自定义动画1">
+<meta name="twitter:description" content="继承Animation类实现自定义动画效果。  通过重写protected void applyTransformation(float interpolatedTime, Transformation t)方法实现自己的效果，这个方法会在动画绘制的过程中反复调用，每次调用interpolatedTime值都会发生变化，变化范围为0~1,当为1时表用动画结束。1234567891011121314">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://liu1024.cn/2016/07/18/Fragment却换时防止重新实例化/"/>
+  <link rel="canonical" href="http://liu1024.cn/2017/04/26/android自定义动画1/"/>
 
 
 
 
 
-  <title> Fragment却换时防止重新实例化 | Aaron的个人博客 </title>
+  <title> android自定义动画1 | Aaron的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +262,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://liu1024.cn/2016/07/18/Fragment却换时防止重新实例化/">
+    <link itemprop="mainEntityOfPage" href="http://liu1024.cn/2017/04/26/android自定义动画1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron">
@@ -283,7 +283,7 @@
             
             
               
-                Fragment却换时防止重新实例化
+                android自定义动画1
               
             
           </h1>
@@ -298,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-18T11:17:17+08:00">
-                2016-07-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T09:50:57+08:00">
+                2017-04-26
               </time>
             
 
@@ -321,8 +321,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发经验/" itemprop="url" rel="index">
-                    <span itemprop="name">开发经验</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -355,7 +355,7 @@
       
 
       
-        <p>在开发中会遇到比较少量的Fragment之间切换，这时候没必要选择ViewPage。但是需要避免<br>Fragment重新被实例化（生命周期重走）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FragmentActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Button button1,button2;</span><br><span class="line">    <span class="keyword">private</span> FragmentManager fragmentManager;</span><br><span class="line">    <span class="keyword">private</span> Fragment first,second,currentFragment;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_fragment);</span><br><span class="line">        button1 = (Button) findViewById(R.id.button1);</span><br><span class="line">        button2 = (Button) findViewById(R.id.button2);</span><br><span class="line">        button1.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">        button2.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">        first = <span class="keyword">new</span> FirstFragment();</span><br><span class="line">        second = <span class="keyword">new</span> SecondFragment();</span><br><span class="line">        fragmentManager = getSupportFragmentManager();</span><br><span class="line">        fragmentManager.beginTransaction()</span><br><span class="line">                .replace(R.id.container,first)</span><br><span class="line">                .commit();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">switchContent</span><span class="params">(Fragment from, Fragment to)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (currentFragment != to) &#123;</span><br><span class="line">            currentFragment = to;</span><br><span class="line">            FragmentTransaction transaction = fragmentManager.beginTransaction().setCustomAnimations(</span><br><span class="line">                    android.R.anim.fade_in, android.R.anim.fade_out);</span><br><span class="line">            <span class="keyword">if</span> (!to.isAdded()) &#123;    <span class="comment">// 先判断是否被add过</span></span><br><span class="line">                transaction.hide(from).add(R.id.container, to).commit(); <span class="comment">// 隐藏当前的fragment，add下一个到Activity中</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                transaction.hide(from).show(to).commit(); <span class="comment">// 隐藏当前的fragment，显示下一个</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (v.getId())&#123;</span><br><span class="line">            <span class="keyword">case</span> R.id.button1:</span><br><span class="line">                switchContent(second,first);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> R.id.button2:</span><br><span class="line">                switchContent(first,second);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h1 id="继承Animation类实现自定义动画效果。"><a href="#继承Animation类实现自定义动画效果。" class="headerlink" title="继承Animation类实现自定义动画效果。"></a>继承Animation类实现自定义动画效果。</h1><p>  通过重写protected void applyTransformation(float interpolatedTime, Transformation t)方<br>法实现自己的效果，这个方法会在动画绘制的过程中反复调用，每次调用interpolatedTime值都会发<br>生变化，变化范围为0~1,当为1时表用动画结束。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AlbumAnimation</span> <span class="keyword">extends</span> <span class="title">Animation</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mCenterX;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mCenterY;</span><br><span class="line">    <span class="keyword">private</span> Camera camera;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(<span class="keyword">int</span> width, <span class="keyword">int</span> height, <span class="keyword">int</span> parentWidth, <span class="keyword">int</span> parentHeight)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.initialize(width, height, parentWidth, parentHeight);</span><br><span class="line">        mCenterX = width/<span class="number">2</span>;</span><br><span class="line">        mCenterY = height/<span class="number">2</span>;</span><br><span class="line">        camera = <span class="keyword">new</span> Camera();</span><br><span class="line">        setDuration(<span class="number">2000</span>);</span><br><span class="line">        <span class="comment">//setFillAfter(true);</span></span><br><span class="line">        setInterpolator(<span class="keyword">new</span> LinearInterpolator());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">applyTransformation</span><span class="params">(<span class="keyword">float</span> interpolatedTime, Transformation t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.applyTransformation(interpolatedTime, t);</span><br><span class="line">        <span class="keyword">final</span> Matrix matrix = t.getMatrix();</span><br><span class="line">        camera.save();</span><br><span class="line">        camera.translate(-<span class="number">0.0f</span>,<span class="number">0.0f</span>,-<span class="number">200.0f</span>+(<span class="number">200</span>*interpolatedTime));</span><br><span class="line">        camera.getMatrix(matrix);</span><br><span class="line">        camera.restore();</span><br><span class="line">        matrix.preTranslate(-mCenterX,-mCenterY);</span><br><span class="line">        matrix.postTranslate(mCenterX,mCenterY);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -387,6 +387,10 @@
           
             <a href="/tags/android/" rel="tag"># android</a>
           
+            <a href="/tags/Animation/" rel="tag"># Animation</a>
+          
+            <a href="/tags/自定义动画/" rel="tag"># 自定义动画</a>
+          
         </div>
       
 
@@ -398,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/01/Smali基本语法/" rel="next" title="Smali基本语法">
-                <i class="fa fa-chevron-left"></i> Smali基本语法
+              <a href="/2017/03/13/android事件传递机制/" rel="next" title="android事件传递机制">
+                <i class="fa fa-chevron-left"></i> android事件传递机制
               </a>
             
           </div>
@@ -407,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/18/hexo常用命令笔记/" rel="prev" title="hexo常用命令笔记">
-                hexo常用命令笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -457,8 +457,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ww3.sinaimg.cn/mw690/a4a46183jw8eykg5nwl9tj20e80e83zd.jpg"
@@ -540,6 +549,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#继承Animation类实现自定义动画效果。"><span class="nav-number">1.</span> <span class="nav-text">继承Animation类实现自定义动画效果。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

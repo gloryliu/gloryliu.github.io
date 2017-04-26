@@ -1691,7 +1691,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e90ec3;
+  background: #b02800;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2549,8 +2549,9 @@ body {
   background-attachment: fixed;
 }
 .header {
-  background: url("http://wx2.sinaimg.cn/large/a4a46183ly1fexosj8inmj20sb094ahy.jpg");
-  -moz-background-size: 100% 100%;
-  background-size: 100% auto;
-  background-attachment: fixed;
+  background: url("http://wx4.sinaimg.cn/large/a4a46183ly1fexu6fcnaoj20rs0bek3u.jpg");
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
