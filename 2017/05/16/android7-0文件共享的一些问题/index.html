@@ -1,0 +1,751 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android,android7.0," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在Android7.0的系统上，会遇到报如下错误。Caused by: android.os.FileUriExposedException原因是，安卓官方为了提高私有文件的安全性，面向 Android 7.0 或更高版本的应用私有目录被限制访问　(0700)。此设置可防止私有文件的元数据泄漏，如它们的大小或存在性.
+传递软件包网域外的 file:// URI 可能给接收器留下无法访问的路径。因此">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android7.0文件共享的一些问题">
+<meta property="og:url" content="http://liu1024.cn/2017/05/16/android7-0文件共享的一些问题/index.html">
+<meta property="og:site_name" content="Aaron的个人博客">
+<meta property="og:description" content="在Android7.0的系统上，会遇到报如下错误。Caused by: android.os.FileUriExposedException原因是，安卓官方为了提高私有文件的安全性，面向 Android 7.0 或更高版本的应用私有目录被限制访问　(0700)。此设置可防止私有文件的元数据泄漏，如它们的大小或存在性.
+传递软件包网域外的 file:// URI 可能给接收器留下无法访问的路径。因此">
+<meta property="og:updated_time" content="2017-05-17T09:25:00.735Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android7.0文件共享的一些问题">
+<meta name="twitter:description" content="在Android7.0的系统上，会遇到报如下错误。Caused by: android.os.FileUriExposedException原因是，安卓官方为了提高私有文件的安全性，面向 Android 7.0 或更高版本的应用私有目录被限制访问　(0700)。此设置可防止私有文件的元数据泄漏，如它们的大小或存在性.
+传递软件包网域外的 file:// URI 可能给接收器留下无法访问的路径。因此">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Aaron'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://liu1024.cn/2017/05/16/android7-0文件共享的一些问题/"/>
+
+
+
+
+
+  <title> android7.0文件共享的一些问题 | Aaron的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aaron的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个很帅的人正在阅读</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://liu1024.cn/2017/05/16/android7-0文件共享的一些问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww3.sinaimg.cn/mw690/a4a46183jw8eykg5nwl9tj20e80e83zd.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aaron的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                android7.0文件共享的一些问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T10:08:19+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发经验/" itemprop="url" rel="index">
+                    <span itemprop="name">开发经验</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在Android7.0的系统上，会遇到报如下错误。<br>Caused by: android.os.FileUriExposedException<br>原因是，安卓官方为了提高私有文件的安全性，面向 Android 7.0 或更高版本的应用私有目录被限制访问　(0700)。此设置可防止私有文件的元数据泄漏，如它们的大小或存在性.</p>
+<p>传递软件包网域外的 file:// URI 可能给接收器留下无法访问的路径。因此，尝试传递 file:// URI 会触发 FileUriExposedException。分享私有文件内容的推荐方法是使用 <a href="https://developer.android.google.cn/reference/android/support/v4/content/FileProvider.html" target="_blank" rel="external">FileProvider</a>。</p>
+<h1 id="1-定义一个FileProvider"><a href="#1-定义一个FileProvider" class="headerlink" title="1.定义一个FileProvider"></a>1.定义一个FileProvider</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="tag">&lt;<span class="name">provider</span></span><br><span class="line">            <span class="attr">android:name</span>=<span class="string">"android.support.v4.content.FileProvider"</span></span><br><span class="line">            <span class="attr">android:authorities</span>=<span class="string">"com.liu.youyou.fileprovider"</span></span><br><span class="line">            <span class="attr">android:exported</span>=<span class="string">"false"</span></span><br><span class="line">            <span class="attr">android:grantUriPermissions</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">            ...</span><br><span class="line">        <span class="tag">&lt;/<span class="name">provider</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="2-添加可用权限的文件目录"><a href="#2-添加可用权限的文件目录" class="headerlink" title="2.添加可用权限的文件目录"></a>2.添加可用权限的文件目录</h1><p>在res目录下，增加xml文件夹，并新建一个名为 file_paths.xml 的文件。文件内容格式如下:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">paths</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">external-path</span> <span class="attr">name</span>=<span class="string">"external_files"</span> <span class="attr">path</span>=<span class="string">"good/"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">paths</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>标签下面必须包含至少包含以下标签中的一个或者多个。<br>files-path:表示Context.getFilesDir()目录或者其子目录。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">files-path</span> <span class="attr">name</span>=<span class="string">"name1"</span> <span class="attr">path</span>=<span class="string">"test1"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>表示路径 : /data/data/com.liu.youyou/files/test1<br>cache-path:表示Context.getCacheDir()目录或者其子目录。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cache-path</span> <span class="attr">name</span>=<span class="string">"name2"</span> <span class="attr">path</span>=<span class="string">"test2"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>表示路径 : /data/data/com.liu.youyou/cache/test2<br>external-path:表示Environment.getExternalStorageDirectory()目录或者其子目录。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">external-path</span> <span class="attr">name</span>=<span class="string">"name3"</span> <span class="attr">path</span>=<span class="string">"test3"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>表示路径 : /storage/emulated/0/test3<br>external-files-path:表示Context.getExternalFilesDir(null)目录或者其子目录<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">external-files-path</span> <span class="attr">name</span>=<span class="string">"name4"</span> <span class="attr">path</span>=<span class="string">"test4"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>表示路径 : /storage/emulated/0/Android/data/com.liu.youyou/files/test4<br>external-cache-path:表示Context.getExternalCacheDir()目录或者其子目录<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">external-cache-path</span> <span class="attr">name</span>=<span class="string">"name5"</span> <span class="attr">path</span>=<span class="string">"test5"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>表示路径 : /storage/emulated/0/Android/data/com.liu.youyou/cache/test5</p>
+<h1 id="3-增加到provider"><a href="#3-增加到provider" class="headerlink" title="3.增加到provider"></a>3.增加到provider</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">provider</span></span><br><span class="line">   <span class="attr">android:name</span>=<span class="string">"android.support.v4.content.FileProvider"</span></span><br><span class="line">   <span class="attr">android:authorities</span>=<span class="string">"com.liu.youyou.fileprovider"</span></span><br><span class="line">   <span class="attr">android:exported</span>=<span class="string">"false"</span></span><br><span class="line">   <span class="attr">android:grantUriPermissions</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">meta-data</span></span><br><span class="line">           <span class="attr">android:name</span>=<span class="string">"android.support.FILE_PROVIDER_PATHS"</span></span><br><span class="line">           <span class="attr">android:resource</span>=<span class="string">"@xml/file_paths"</span> /&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">provider</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="通过provider生成Uri"><a href="#通过provider生成Uri" class="headerlink" title="通过provider生成Uri"></a>通过provider生成Uri</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File xxxFile = <span class="keyword">new</span> File(Environment.getExternalStorageDirectory()+<span class="string">"/good"</span>,<span class="string">"xxxx.txt"</span>);</span><br><span class="line">Uri data = FileProvider.getUriForFile(getContext(), <span class="string">"com.liu.youyou.fileprovider"</span>, xxxFile);</span><br></pre></td></tr></table></figure>
+<h1 id="5-赋予临时权限给Uri"><a href="#5-赋予临时权限给Uri" class="headerlink" title="5.赋予临时权限给Uri"></a>5.赋予临时权限给Uri</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br></pre></td></tr></table></figure>
+<p>最终可以通过Uri提供文件访问了。</p>
+<h1 id="总结注意点"><a href="#总结注意点" class="headerlink" title="总结注意点:"></a>总结注意点:</h1><p>1、android:authorities=”com.liu.youyou.fileprovider”,这里的authorities值为包名加”.fileprovider”<br>2、FileProvider.getUriForFile(getContext(), “com.liu.youyou.fileprovider”, xxxFile);第二个参数必须和provider中的authorities的值完全一样。<br>3、<external-path name="external_files" path="good/">这里的name可以随便，path不要写父文件，比如path=”/storage/emulated/0/good”,这样写是不行的，写个”good/“就ok。</external-path></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/android7-0/" rel="tag"># android7.0</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/12/Service之绑定服务/" rel="next" title="Service之绑定服务">
+                <i class="fa fa-chevron-left"></i> Service之绑定服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/17/编译bsdiff/" rel="prev" title="编译bsdiff">
+                编译bsdiff <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww3.sinaimg.cn/mw690/a4a46183jw8eykg5nwl9tj20e80e83zd.jpg"
+               alt="Aaron" />
+          <p class="site-author-name" itemprop="name">Aaron</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gloryliu/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2762236291" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-定义一个FileProvider"><span class="nav-number">1.</span> <span class="nav-text">1.定义一个FileProvider</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-添加可用权限的文件目录"><span class="nav-number">2.</span> <span class="nav-text">2.添加可用权限的文件目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-增加到provider"><span class="nav-number">3.</span> <span class="nav-text">3.增加到provider</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过provider生成Uri"><span class="nav-number">4.</span> <span class="nav-text">通过provider生成Uri</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-赋予临时权限给Uri"><span class="nav-number">5.</span> <span class="nav-text">5.赋予临时权限给Uri</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结注意点"><span class="nav-number">6.</span> <span class="nav-text">总结注意点:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android," />
+  <meta name="keywords" content="android,java,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek" />
 
 
 
@@ -90,19 +90,19 @@
 
 
 
-<meta name="description" content="在android中有好几种的布局加载形式，这几种说到底都是一种方式及底层的实现是一样的。
-第一种形式：123LayoutInflater LayoutInflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);LayoutInflater.inflate(R.layout.XXXXX,ro">
+<meta name="description" content="绑定服务绑定服务是客户端-服务器接口中的服务器。绑定服务可让组件（例如 Activity）绑定到服务、发送请求、接收响应，甚至执行进程间通信 (IPC)。 绑定服务通常只在为其他应用组件服务时处于活动状态，不会无限期在后台运行。
+本文向您介绍如何创建绑定服务，包括如何绑定到来自其他应用组件的服务。 不过，您还应参阅服务文档，了解有关一般服务的更多信息，例如：如何利用服务传送通知、如何将服务设置为在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搞明白LayoutInflater">
-<meta property="og:url" content="http://liu1024.cn/2016/08/05/搞明白LayoutInflater/index.html">
+<meta property="og:title" content="Service之绑定服务">
+<meta property="og:url" content="http://liu1024.cn/2017/05/12/Service之绑定服务/index.html">
 <meta property="og:site_name" content="Aaron的个人博客">
-<meta property="og:description" content="在android中有好几种的布局加载形式，这几种说到底都是一种方式及底层的实现是一样的。
-第一种形式：123LayoutInflater LayoutInflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);LayoutInflater.inflate(R.layout.XXXXX,ro">
-<meta property="og:updated_time" content="2016-08-08T03:41:49.954Z">
+<meta property="og:description" content="绑定服务绑定服务是客户端-服务器接口中的服务器。绑定服务可让组件（例如 Activity）绑定到服务、发送请求、接收响应，甚至执行进程间通信 (IPC)。 绑定服务通常只在为其他应用组件服务时处于活动状态，不会无限期在后台运行。
+本文向您介绍如何创建绑定服务，包括如何绑定到来自其他应用组件的服务。 不过，您还应参阅服务文档，了解有关一般服务的更多信息，例如：如何利用服务传送通知、如何将服务设置为在">
+<meta property="og:updated_time" content="2017-05-12T09:02:43.788Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="搞明白LayoutInflater">
-<meta name="twitter:description" content="在android中有好几种的布局加载形式，这几种说到底都是一种方式及底层的实现是一样的。
-第一种形式：123LayoutInflater LayoutInflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);LayoutInflater.inflate(R.layout.XXXXX,ro">
+<meta name="twitter:title" content="Service之绑定服务">
+<meta name="twitter:description" content="绑定服务绑定服务是客户端-服务器接口中的服务器。绑定服务可让组件（例如 Activity）绑定到服务、发送请求、接收响应，甚至执行进程间通信 (IPC)。 绑定服务通常只在为其他应用组件服务时处于活动状态，不会无限期在后台运行。
+本文向您介绍如何创建绑定服务，包括如何绑定到来自其他应用组件的服务。 不过，您还应参阅服务文档，了解有关一般服务的更多信息，例如：如何利用服务传送通知、如何将服务设置为在">
 
 
 
@@ -130,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://liu1024.cn/2016/08/05/搞明白LayoutInflater/"/>
+  <link rel="canonical" href="http://liu1024.cn/2017/05/12/Service之绑定服务/"/>
 
 
 
 
 
-  <title> 搞明白LayoutInflater | Aaron的个人博客 </title>
+  <title> Service之绑定服务 | Aaron的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +265,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://liu1024.cn/2016/08/05/搞明白LayoutInflater/">
+    <link itemprop="mainEntityOfPage" href="http://liu1024.cn/2017/05/12/Service之绑定服务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron">
@@ -286,7 +286,7 @@
             
             
               
-                搞明白LayoutInflater
+                Service之绑定服务
               
             
           </h1>
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-05T17:31:45+08:00">
-                2016-08-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T16:50:09+08:00">
+                2017-05-12
               </time>
             
 
@@ -311,28 +311,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发经验/" itemprop="url" rel="index">
-                    <span itemprop="name">开发经验</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -358,11 +336,26 @@
       
 
       
-        <p>在android中有好几种的布局加载形式，这几种说到底都是一种方式及底层的实现是一样的。</p>
-<h2 id="第一种形式："><a href="#第一种形式：" class="headerlink" title="第一种形式："></a>第一种形式：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LayoutInflater LayoutInflater =</span><br><span class="line">(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);</span><br><span class="line">LayoutInflater.inflate(R.layout.XXXXX,root);</span><br></pre></td></tr></table></figure>
-<h2 id="第二种形式："><a href="#第二种形式：" class="headerlink" title="第二种形式："></a>第二种形式：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LayoutInflater.from(context).inflate(R.layout.XXXX, root);</span><br></pre></td></tr></table></figure>
-<h2 id="第三种形式："><a href="#第三种形式：" class="headerlink" title="第三种形式："></a>第三种形式：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">View.inflate(context, R.layout.XXXX, root);</span><br></pre></td></tr></table></figure>
-<p>这三种的最根本就是第一种。为什么这么说呢是因为View.inflate方法是去调用了LayoutInflater.from，而<br>LayoutInflater.from是调用了LayoutInflater LayoutInflater =<br>(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);返回了LayoutInflater。<br>总而最后都是创建了LayoutInflater实例。所有这里都是比较明朗了不用纠结这几种方式的使用，看个人习惯了。<br>最终的加载布局方法是LayoutInflater.inflate(R.layout.XXXXX,root);第一个参数是布局的ID,第二个<br>参数是把你所加载的布局放在某个布局的内部，换句话说就是给加载的布局外包一个。比如重写RelativeLayout<br>需要一个布局第二个参数为this，如果为null就不会显示出来布局，当然可以为null，最后用addView方法加进来<br>也是能达到目的的。</p>
+        <h1 id="绑定服务"><a href="#绑定服务" class="headerlink" title="绑定服务"></a>绑定服务</h1><p>绑定服务是客户端-服务器接口中的服务器。绑定服务可让组件（例如 Activity）绑定到服务、发送请求、接收响应，甚至执行进程间通信 (IPC)。 绑定服务通常只在为其他应用组件服务时处于活动状态，不会无限期在后台运行。</p>
+<p>本文向您介绍如何创建绑定服务，包括如何绑定到来自其他应用组件的服务。 不过，您还应参阅服务文档，了解有关一般服务的更多信息，例如：如何利用服务传送通知、如何将服务设置为在前台运行等等。</p>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>绑定服务是 Service 类的实现，可让其他应用与其绑定和交互。要提供服务绑定，您必须实现 onBind() 回调方法。该方法返回的 IBinder 对象定义了客户端用来与服务进行交互的编程接口。</p>
+<p>绑定到已启动服务<br>正如服务文档中所述，您可以创建同时具有已启动和绑定两种状态的服务。 也就是说，可通过调用 startService() 启动该服务，让服务无限期运行；此外，还可通过调用 bindService() 使客户端绑定到服务。</p>
+<p>如果您确实允许服务同时具有已启动和绑定状态，则服务启动后，系统“不会”在所有客户端都取消绑定时销毁服务。 为此，您必须通过调用 stopSelf() 或 stopService() 显式停止服务。</p>
+<p>尽管您通常应该实现 onBind() 或 onStartCommand()，但有时需要同时实现这两者。例如，音乐播放器可能发现让其服务无限期运行并同时提供绑定很有用处。 这样一来，Activity 便可启动服务进行音乐播放，即使用户离开应用，音乐播放也不会停止。 然后，当用户返回应用时，Activity 可绑定到服务，重新获得回放控制权。</p>
+<p>请务必阅读管理绑定服务的生命周期部分，详细了解有关为已启动服务添加绑定时该服务的生命周期信息。<br>客户端可通过调用 bindService() 绑定到服务。调用时，它必须提供 ServiceConnection 的实现，后者会监控与服务的连接。bindService() 方法会立即无值返回，但当 Android 系统创建客户端与服务之间的连接时，会对 ServiceConnection 调用 onServiceConnected()，向客户端传递用来与服务通信的 IBinder。</p>
+<p>多个客户端可同时连接到一个服务。不过，只有在第一个客户端绑定时，系统才会调用服务的 onBind() 方法来检索 IBinder。系统随后无需再次调用 onBind()，便可将同一 IBinder 传递至任何其他绑定的客户端。</p>
+<p>当最后一个客户端取消与服务的绑定时，系统会将服务销毁（除非 startService() 也启动了该服务）。</p>
+<p>当您实现绑定服务时，最重要的环节是定义您的 onBind() 回调方法返回的接口。您可以通过几种不同的方法定义服务的 IBinder 接口，下文对这些方法逐一做了阐述。</p>
+<h1 id="创建绑定服务"><a href="#创建绑定服务" class="headerlink" title="创建绑定服务"></a>创建绑定服务</h1><p>创建提供绑定的服务时，您必须提供 IBinder，用以提供客户端用来与服务进行交互的编程接口。 您可以通过三种方法定义接口：<br>扩展 Binder 类<br>如果服务是供您的自有应用专用，并且在与客户端相同的进程中运行（常见情况），则应通过扩展 Binder 类并从 onBind() 返回它的一个实例来创建接口。客户端收到 Binder 后，可利用它直接访问 Binder 实现中乃至 Service 中可用的公共方法。<br>如果服务只是您的自有应用的后台工作线程，则优先采用这种方法。 不以这种方式创建接口的唯一原因是，您的服务被其他应用或不同的进程占用。</p>
+<p>使用 Messenger<br>如需让接口跨不同的进程工作，则可使用 Messenger 为服务创建接口。服务可以这种方式定义对应于不同类型 Message 对象的 Handler。此 Handler 是 Messenger 的基础，后者随后可与客户端分享一个 IBinder，从而让客户端能利用 Message 对象向服务发送命令。此外，客户端还可定义自有 Messenger，以便服务回传消息。<br>这是执行进程间通信 (IPC) 的最简单方法，因为 Messenger 会在单一线程中创建包含所有请求的队列，这样您就不必对服务进行线程安全设计。<br>使用 AIDL<br>AIDL（Android 接口定义语言）执行所有将对象分解成原语的工作，操作系统可以识别这些原语并将它们编组到各进程中，以执行 IPC。 之前采用 Messenger 的方法实际上是以 AIDL 作为其底层结构。 如上所述，Messenger 会在单一线程中创建包含所有客户端请求的队列，以便服务一次接收一个请求。 不过，如果您想让服务同时处理多个请求，则可直接使用 AIDL。 在此情况下，您的服务必须具备多线程处理能力，并采用线程安全式设计。<br>如需直接使用 AIDL，您必须创建一个定义编程接口的 .aidl 文件。Android SDK 工具利用该文件生成一个实现接口并处理 IPC 的抽象类，您随后可在服务内对其进行扩展。</p>
+<p>注：大多数应用“都不会”使用 AIDL 来创建绑定服务，因为它可能要求具备多线程处理能力，并可能导致实现的复杂性增加。因此，AIDL 并不适合大多数应用，本文也不会阐述如何将其用于您的服务。如果您确定自己需要直接使用 AIDL，请参阅 AIDL 文档。</p>
+<h1 id="扩展-Binder-类"><a href="#扩展-Binder-类" class="headerlink" title="扩展 Binder 类"></a>扩展 Binder 类</h1><p>如果您的服务仅供本地应用使用，不需要跨进程工作，则可以实现自有 Binder 类，让您的客户端通过该类直接访问服务中的公共方法。</p>
+<p>注：此方法只有在客户端和服务位于同一应用和进程内这一最常见的情况下方才有效。 例如，对于需要将 Activity 绑定到在后台播放音乐的自有服务的音乐应用，此方法非常有效。</p>
+<p>以下是具体的设置方法：</p>
+<p>在您的服务中，创建一个可满足下列任一要求的 Binder 实例：<br>包含客户端可调用的公共方法<br>返回当前 Service 实例，其中包含客户端可调用的公共方法<br>或返回由服务承载的其他类的实例，其中包含客户端可调用的公共方法<br>从 onBind() 回调方法返回此 Binder 实例。<br>在客户端中，从 onServiceConnected() 回调方法接收 Binder，并使用提供的方法调用绑定服务。<br>注：之所以要求服务和客户端必须在同一应用内，是为了便于客户端转换返回的对象和正确调用其 API。服务和客户端还必须在同一进程内，因为此方法不执行任何跨进程编组。</p>
+<p>例如，以下这个服务可让客户端通过 Binder 实现访问服务中的方法：</p>
+<pre><code class="java">
+</code></pre>
 
       
     </div>
@@ -390,12 +383,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/android/" rel="tag"># android</a>
-          
-        </div>
-      
 
       
         
@@ -405,8 +392,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/05/Android动画效果translate、scale、alpha、rotate详解/" rel="next" title="Android动画效果translate、scale、alpha、rotate详解">
-                <i class="fa fa-chevron-left"></i> Android动画效果translate、scale、alpha、rotate详解
+              <a href="/2017/05/12/Android服务详解/" rel="next" title="Android服务详解">
+                <i class="fa fa-chevron-left"></i> Android服务详解
               </a>
             
           </div>
@@ -415,8 +402,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/11/DrawerLayout深入了解/" rel="prev" title="DrawerLayout深入了解">
-                DrawerLayout深入了解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/16/android7-0文件共享的一些问题/" rel="prev" title="android7.0文件共享的一些问题">
+                android7.0文件共享的一些问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -566,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一种形式："><span class="nav-number">1.</span> <span class="nav-text">第一种形式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二种形式："><span class="nav-number">2.</span> <span class="nav-text">第二种形式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三种形式："><span class="nav-number">3.</span> <span class="nav-text">第三种形式：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#绑定服务"><span class="nav-number">1.</span> <span class="nav-text">绑定服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建绑定服务"><span class="nav-number">3.</span> <span class="nav-text">创建绑定服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展-Binder-类"><span class="nav-number">4.</span> <span class="nav-text">扩展 Binder 类</span></a></li></ol></div>
             
 
           </div>
