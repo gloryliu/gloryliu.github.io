@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android,java,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -98,7 +98,7 @@ synchronized可以在任意对象或方法上加锁，而加锁的这段代码�
 <meta property="og:site_name" content="Aaron的个人博客">
 <meta property="og:description" content="线程安全概念多个线程访问一个类（对象或方法）时，这个类始终能够表现出正确的行为，那么这个类（对象或方法）就是线程安全的。
 synchronized可以在任意对象或方法上加锁，而加锁的这段代码成为“互斥区”或者“临界区”。123456789101112131415161718192021222324252627public class MyThread extends Thread&amp;#123;		p">
-<meta property="og:updated_time" content="2018-03-09T07:15:00.103Z">
+<meta property="og:updated_time" content="2018-03-12T07:48:14.573Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java线程安全">
 <meta name="twitter:description" content="线程安全概念多个线程访问一个类（对象或方法）时，这个类始终能够表现出正确的行为，那么这个类（对象或方法）就是线程安全的。
@@ -312,6 +312,28 @@ synchronized可以在任意对象或方法上加锁，而加锁的这段代码�
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -341,6 +363,14 @@ synchronized可以在任意对象或方法上加锁，而加锁的这段代码�
 <p>当一个线程访问myThread的run方法时，以排队的方式进行处理（这里排队是按照CPU分配的先后顺序而定的），一个线程想要执行syncronized修饰的方法里的代码，首先是要尝试获得锁，如果拿到锁，执行synchronized代码体内容；拿不到锁，这个线程就会不断的尝试获得这把锁，直到拿到为止，而且是多个线程同时去竞争这把锁。（也就是会有锁竞争的问题）</p>
 <h3 id="多个线程多个锁"><a href="#多个线程多个锁" class="headerlink" title="多个线程多个锁"></a>多个线程多个锁</h3><p>多个线程多个锁：多个线程，每个线程都可以拿到自己指定的锁，分别获得锁之后，执行synchronized方法体的内容。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultiThread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">printNum</span><span class="params">(String tag)</span></span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="string">"a"</span>.equals(tag))&#123;</span><br><span class="line">				num = <span class="number">100</span>;</span><br><span class="line">				System.out.println(<span class="string">"tag a set over"</span>);</span><br><span class="line">				Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				num = <span class="number">200</span>;</span><br><span class="line">				System.out.println(<span class="string">"tag b set over"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(<span class="string">"tag "</span>+tag+<span class="string">" num="</span>+num);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		MultiThread mt1 = <span class="keyword">new</span> MultiThread();</span><br><span class="line">		MultiThread mt2 = <span class="keyword">new</span> MultiThread();</span><br><span class="line">		</span><br><span class="line">		Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">				mt1.printNum(<span class="string">"a"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">		Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">				mt2.printNum(<span class="string">"b"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">		t1.start();</span><br><span class="line">		t2.start();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：关键字synchronized取得的锁都是对象锁，而不是把一段代码（方法）当做锁，上面代码中那个线程先执行synchronized关键字的方法，那个线程就持有该方法所属对象的锁（Lock）,两个对象，线程获得的就是两个不同的锁，他们互不影响。<br>有一种情况则是相同的锁，即在静态方法上加synchronized关键字，表示锁定.class类，类一级别的锁（独占.class类）。</p>
+<h3 id="对象锁的同步和异步"><a href="#对象锁的同步和异步" class="headerlink" title="对象锁的同步和异步"></a>对象锁的同步和异步</h3><ul>
+<li>同步：synchronized 同步的概念就是共享，我们要牢牢记住“共享”这两个字，如果不是共享的资源，就没有必要进行同步。</li>
+<li>异步：asynchronized 异步的概念就是独立，相互之间不受到任何制约，就好像我们学习http的时候，在页面发起的Ajax请求，我们还可以继续浏览或操作页面的内容，二者之间没有任何关系。同步的目的就是为了线程安全，其实对于线程安全来说，需要满足两个特性：原子性和可见性。   </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			System.out.println(Thread.currentThread().getName());</span><br><span class="line">			Thread.sleep(<span class="number">4000</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(Thread.currentThread().getName());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		MyObject obj = <span class="keyword">new</span> MyObject();</span><br><span class="line">		Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">				obj.method1();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">		Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">				obj.method2();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">		t1.start();</span><br><span class="line">		t2.start();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：A线程先持有object对象的Lock锁，B线程如果在这个时候调用对象中的同步（synchronized）方法则需要等待，也就是同步。A线程持有object对象的Lock锁，B线程可以以异步的方式调用对象中的非synchronized修饰的方法。</p>
+<h3 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h3><p>对于对象的同步和异步的方法，我们在设计自己程序的时候，一定要考虑问题的整体。不然就会出现数据不一致的错误，很经典的错误就是脏读（dirtyread）<br>总结：在我们队一个对象的方法加锁的时候，需要考虑业务的整体性，即为setValue/getValue方法同时加锁synchronized同步关键字，保证业务（service）的原子性，不然会出现业务错误（也从侧面保证业务的一致性）。</p>
 
       
     </div>
@@ -367,6 +397,12 @@ synchronized可以在任意对象或方法上加锁，而加锁的这段代码�
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
       
 
       
@@ -468,7 +504,7 @@ synchronized可以在任意对象或方法上加锁，而加锁的这段代码�
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -534,7 +570,7 @@ synchronized可以在任意对象或方法上加锁，而加锁的这段代码�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全概念"><span class="nav-number">1.</span> <span class="nav-text">线程安全概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized"><span class="nav-number">2.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个线程多个锁"><span class="nav-number">3.</span> <span class="nav-text">多个线程多个锁</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全概念"><span class="nav-number">1.</span> <span class="nav-text">线程安全概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized"><span class="nav-number">2.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个线程多个锁"><span class="nav-number">3.</span> <span class="nav-text">多个线程多个锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象锁的同步和异步"><span class="nav-number">4.</span> <span class="nav-text">对象锁的同步和异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脏读"><span class="nav-number">5.</span> <span class="nav-text">脏读</span></a></li></ol></div>
             
 
           </div>
